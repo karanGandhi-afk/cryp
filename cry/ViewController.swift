@@ -9,21 +9,52 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    
+    
+    @IBOutlet weak var outputLabel: UILabel!
+    
+    
+    @IBOutlet weak var textField: UITextField!
+    
+    
+    @IBAction func buttonPressed(_ sender: Any) {
+        
+        if let symbol = textField.text
+        {
+            
+            getData(symbol: symbol)
+              
+            
+        }
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        getData()
+        
     }
 
 
-    let url = "https://min-api.cryptocompare.com/data/price?tsyms=USD&fsym=btc"
+    var url = "https://min-api.cryptocompare.com/data/price?tsyms=USD"
     
     
     
-    func getData() {
+    func getData(symbol : String) {
         
         
+        url = "\(url)&fsym=\(symbol)"
         //1. Initialize URL
         
         
@@ -46,6 +77,11 @@ class ViewController: UIViewController {
                 
              
                 print(Result.USD)
+                
+                DispatchQueue.main.async {
+                    self.outputLabel.text = "\(Result.USD)"
+                }
+             
                 
             }
             
